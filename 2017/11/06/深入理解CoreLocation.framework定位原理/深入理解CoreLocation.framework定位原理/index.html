@@ -56,8 +56,8 @@
 
 
 写在前面从底层的实现来说，与之前我所理解的有所不同，之前认为是框架最终和内核交互获取定位信息；但后面发现，框架实际上并没有直接去从内核获取定位信息，而是通过XPC（苹果中进程通信框架）发送和接受消息去获取定位。而与">
-<meta property="og:image" content="https://github.com/4ch12dy/4ch12dy.github.io.git/4ch12dy/4ch12dy.github.io.git/2017/11/06/深入理解CoreLocation.framework定位原理/深入理解CoreLocation.framework定位原理/king/iOSRE/iOS加固/hookLocation/didi-CoreLocation研究/xpc.png">
-<meta property="og:updated_time" content="2017-11-06T07:56:14.000Z">
+<meta property="og:image" content="https://github.com/4ch12dy/4ch12dy.github.io/blob/master/articlePic/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3CoreLocation.framework%E5%AE%9A%E4%BD%8D%E5%8E%9F%E7%90%86/xpc.png?raw=true">
+<meta property="og:updated_time" content="2017-11-06T07:59:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解CoreLocation.framework定位原理">
 <meta name="twitter:description" content="深入理解CoreLocation.framework定位原理
@@ -66,7 +66,7 @@
 
 
 写在前面从底层的实现来说，与之前我所理解的有所不同，之前认为是框架最终和内核交互获取定位信息；但后面发现，框架实际上并没有直接去从内核获取定位信息，而是通过XPC（苹果中进程通信框架）发送和接受消息去获取定位。而与">
-<meta name="twitter:image" content="https://github.com/4ch12dy/4ch12dy.github.io.git/4ch12dy/4ch12dy.github.io.git/2017/11/06/深入理解CoreLocation.framework定位原理/深入理解CoreLocation.framework定位原理/king/iOSRE/iOS加固/hookLocation/didi-CoreLocation研究/xpc.png">
+<meta name="twitter:image" content="https://github.com/4ch12dy/4ch12dy.github.io/blob/master/articlePic/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3CoreLocation.framework%E5%AE%9A%E4%BD%8D%E5%8E%9F%E7%90%86/xpc.png?raw=true">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -291,7 +291,7 @@
 <li>当收到一条<code>xpc_error_connection_interrupted</code>消息的时候，会发送<code>kCLConnectionMessageWatchdog</code>消息然后重复之前的步骤。</li>
 </ul>
 <p>如下图所示：</p>
-<p><img src="/4ch12dy/4ch12dy.github.io.git/2017/11/06/深入理解CoreLocation.framework定位原理/深入理解CoreLocation.framework定位原理/king/iOSRE/iOS加固/hookLocation/didi-CoreLocation研究/xpc.png" alt="xpc"></p>
+<p><img src="https://github.com/4ch12dy/4ch12dy.github.io/blob/master/articlePic/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3CoreLocation.framework%E5%AE%9A%E4%BD%8D%E5%8E%9F%E7%90%86/xpc.png?raw=true" alt="xpc"></p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>目前把整个的交互过程以及相关协议内容梳理了出来，但还有很多细节需要分析，下一步准备做代码测试，发送xpc消息给deamon进程，看能不能通过xpc拿到定位信息。待解决的问题有具体到每一条发送消息的内容还需解决，一些其他影响连接的事情还需要分析。（在这中还有遇到一个坑，在iOS上没有xpc头文件，需要将macOS上的xpc软连接到对应的iOSSDK才能编译通过）</p>
 <h4 id="一个XPC交互的例子"><a href="#一个XPC交互的例子" class="headerlink" title="一个XPC交互的例子"></a>一个XPC交互的例子</h4><p>这里分为服务端和客户端来说明，例子中客户端传入两个数发送消息给服务端计算后并返回结果。</p>
 <p>服务端：</p>
